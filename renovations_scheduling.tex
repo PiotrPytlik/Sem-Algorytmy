@@ -1,0 +1,147 @@
+\documentclass{beamer}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\setbeamercovered{transparent}
+\usetheme{Warsaw}
+
+\begin{document}
+
+\title{Praktyka optymalizacji}
+\subtitle{Planowanie remontów generalnych silników}
+\author[Bartosz Łągwa \& Piotr Pytlik]{Bartosz Łągwa \and Piotr Pytlik}
+\institute{Instytut Informatyki \\ Uniwersytet Wrocławski}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Plan prezentacji}
+	\tableofcontents
+\end{frame}
+
+\section{Wstęp}
+	\subsection{Opis oraz specyfikacja wariantów zagadnienia}
+		\begin{frame}
+			\frametitle{Wariant podstawowy}
+			
+			Mamy dany zbiór $S \; (|S| \approx 100)$ silników przeznaczonych do remontu. Każdy z silników powinien być wyremontowany i gotowy do odbioru po upływie maksymalnie czasu $T = 1$ miesiąc.\bigskip
+			
+			\onslide<2->
+			Silniki muszą przejść przez kolejne platformy ze zbioru $P = \{p_1, p_2, \dots, p_{15}\}$. Z każdym silnikiem $s_i  \in S$, gdzie $i = 1, 2, \dots, |S|$, związany jest ciąg operacji:
+			
+			\begin{equation*}
+				\{ o_{i1}, o_{i2}, \dots, o_{i15} \},
+			\end{equation*}
+			
+			takich że dla silnika $s_i$ na stanowisku $p_j \; (j = 1, 2, \dots, 15)$ wykonywana jest operacja $o_{ij}$. Czas wykonywania operacji $o_{ij}$ wynosi $t_{ij}$.
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{Dodatkowa funkcjonalność}
+			
+			Możemy założyć, że zakład dodatkowo wykonuje także awaryjne naprawy silników. \bigskip
+			
+			Wówczas taki silnik $s_i$ przechodzi jedynie przez pewne stanowiska (dla pewnych operacji $o_{ij}$ czasy $t_{ij}$ wynoszą 0). Oczywiście taka naprawa zakłóca dotychczasowy harmonogram, co zmusza nas do pewnej jego korekty.
+		\end{frame}
+		
+	\subsection{Model matematyczny}
+		\begin{frame}
+			\frametitle{Ograniczenia}
+			
+			\begin{itemize}
+				\item na platformie (stanowisku) może przebywać tylko jeden silnik
+				\item<2-> na silniku może być wykonywana jednocześnie tylko jedna operacja (silnik może znajdować się na tylko jednym stanowisku)
+				\item<3-> kolejność rozpoczęcia prac nad kolejnymi silnikami jest dowolna
+				\item<4-> każda platforma obsługuje silniki w takiej kolejności w jakiej rozpoczęto nad nimi prace remontowe
+				\item<5-> operację $o_{i,j}$ dla $j = 2, 3, \dots, 15$ należy wykonać dopiero po wykonaniu operacji $o_{i,j - 1}$.
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{Funkcja celu}
+			
+			Niech $\pi$ będzie permutacją, która określa kolejność remontowania silników. Naszym celem jest znalezienie takiej permutacji $\pi_{opt}$, że:
+			
+			\begin{equation*}
+				\varphi ( \pi_{opt} ) = \min \{ \pi: \varphi ( \pi ) \},
+			\end{equation*}
+			
+			gdzie $\varphi ( \pi ) = \max \{ i: f(s_i) \}$, a $f(s_i)$ oznacza termin zakończenia prac nad silnikiem $s_i$.
+		\end{frame}
+	
+	\subsection{Wpływ ograniczeń na złożoność obliczeniową}
+		\begin{frame}
+			\frametitle{Rozmiar przestrzeni rozwiązań}
+			
+			Niech $n = |S|$. Ponieważ dowolna permutacja kolejności remontowania silników może być optymalną to rozmiar przestrzeni rozwiązań wynosi $n!$. Korzystając ze wzoru Stirlinga:
+			
+			\begin{equation*}
+				n! \approx \Big( \frac{n}{e} \Big)^n \sqrt{2 \pi n}
+			\end{equation*}
+			
+			otrzymujemy, że złożoność obliczeniowa najbardziej naiwnego algorytmu wynosi $\mathcal{O}(n^n)$.
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{Rozmiar przestrzeni rozwiązań - cd.}
+			
+			W naszym przypadku $n \approx 100$, a więc przestrzeń rozwiązań wynosi w przybliżeniu $100! \approx 10^{158}$. \bigskip
+			
+			\onslide<2->
+			\begin{block}{Dla porównania}
+				\begin{itemize}
+					\item Od wielkiego wybuchu upłynęło $\approx 10^{18}$ sekund.
+					\item Objętość Słońca to $\approx 10^{36}$ mm$^3$.
+					\item Objętość Drogi Mlecznej to $\approx 10^{68}$ mm$^3$.
+				\end{itemize}
+			\end{block}
+		\end{frame}
+		
+\section{Możliwości rozwiązań}
+
+	\begin{frame}
+		\frametitle{Plan prezentacji}
+		\tableofcontents[currentsection]
+	\end{frame}
+	
+	\subsection{Algorytm konstrukcyjny}
+		\begin{frame}
+			
+		\end{frame}
+		
+	\subsection{Metaheurystyka}
+		\begin{frame}
+			\frametitle{Przeszukiwanie z Tabu}
+			
+            Niech $\pi$ oznacza aktualną permutację silników.
+            \skip
+            Niech Tabu oznacza listę silników, których kolejności nie wolno nam już modyfikować.
+            \skip
+            Niech N\left($\pi$,$s_i$\right) oznacza zbiór wszystkich permutacji uzyskanych z $\pi$ jedynie poprzez zmianę pozycji silnika $s_i$.
+
+			\begin{block}{Przykładowy algorytm}
+				\begin{itemize}
+					\item Wygeneruj losową permutację początkową $\pi$.
+					\item Stwórz pustą listę Tabu.
+					\item Dopóki lista Tabu nie zawiera wszystkich silników:
+                    \begin{itemize}
+                        \item weź pierwszy silnik $s_i$ z $\pi$ który nie należy do Tabu
+                        \item wstaw do $\pi$ najlepsze rozwiązanie z N\left($\pi$,$s_i$\right).
+                        \item wstaw do Tabu silnik $s_i$.
+                    \end{itemize}
+				\end{itemize}
+			\end{block}
+            
+		\end{frame}
+
+\section{Implementacje i wnioski}
+
+	\begin{frame}
+		\frametitle{Plan prezentacji}
+		\tableofcontents[currentsection]
+	\end{frame}
+
+\end{document} 
