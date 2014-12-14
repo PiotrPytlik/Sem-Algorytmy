@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\title{Problem: Minimum cardinality [2]-sumset cover}
+\title{Problem: Pokrycie [2]-sumset o minimalnej mocy}
 \subtitle{Dotychczasowe wyniki i kwestie otwarte}
 \author[Piotr Pytlik \& Jakub Sękowski]{Piotr Pytlik \and Jakub Sękowski}
 \institute{Instytut Informatyki \\ Uniwersytet Wrocławski}
@@ -22,13 +22,14 @@
 	\tableofcontents
 \end{frame}
 
-\section{Minimum cardinality sumset covers}
+\section{Pokrycia sumset o minimalnej mocy}
 	\subsection{Definicja}
-		\begin{frame}
-			def. h-iterated sumset,
-		
-			def. sumset (suma niesk. h-iterated sumset)
-		
+		\begin{frame} \frametitle{Podstawowe definicje}
+            Def.: h-iterowany sumset zbioru $ X $
+            $ hX = \lbrace x_1 + x_2 + ... + x_h : x_1,x_2,...,x_h \in X \rbrace $
+            
+            \vspace{\baselineskip}
+            
 			def. problemu
 		\end{frame}
 		
@@ -42,20 +43,20 @@
 			fakt o NP-zupełności
 		\end{frame}
 		
-\section{Minimum cardinality [2]-sumset covers}
+\section{Pokrycia [2]-sumset o minimalnej mocy}
 	\subsection{Definicja}
 		\begin{frame} \frametitle{W czym rzecz?}
 			Def.: [h]-sumset zbioru $ X $
 			
 			$ [h]X = \bigcup_{i=1}^{h} iX $
 			
-			Def.: [h]-sumset cover zbioru $ S \subset N^{+} $ to taki zbiór $ X \subset N^{+} $ że $ S \subset [h]X $			
+			Def.: Pokrycie [h]-sumset zbioru $ S \subset N^{+} $ to taki zbiór $ X \subset N^{+} $ że $ S \subset [h]X $
 			
-			Problem: Minimum cardinality [h]-sumset cover
+			Problem: Pokrycie [h]-sumset o minimalnej mocy
 			
-			Dla danego zbioru $ S \subset N^{+} $ znaleźć minimalny w sensie liczności [h]-sumset cover $ X $ zbioru $ S $. Wtedy $ |X| $ to [h]-sumset rank zbioru $ S $ (piszemy $ |X| = rk_{h}(S) $).
+			Dla danego zbioru $ S \subset N^{+} $ znaleźć minimalne w sensie liczności pokrycie [h]-sumset $ X $ zbioru $ S $. Wtedy $ |X| $ to rząd [h]-sumset zbioru $ S $ (piszemy $ |X| = rk_{h}(S) $).
 			
-			Def.: Zbiór $ S \subset N^{+} $ jest [h]-simplifiable, jeśli $ rk_{h}(S) < |S| $
+			Def.: Zbiór $ S \subset N^{+} $ jest [h]-upraszczalny, jeśli $ rk_{h}(S) < |S| $
 		\end{frame}
 		
 	\subsection{Przykłady}
@@ -93,19 +94,19 @@
 \section{Trudność problemu}
 	\subsection{Proste ograniczenia}
 		\begin{frame}
-			lemat 1 z "On finding..."
+			lemat 1 z $"On finding..."$
 		\end{frame}
 		
 	\subsection{NP-trudność}
 		\begin{frame} \frametitle{Nie miejmy złudzeń...}
-			Fakt: Stwierdzenie, czy dany zbiór $ S \subset N^{+} $ jest [2]-simplifiable jest problemem NP-trudnym.
+			Fakt: Stwierdzenie, czy dany zbiór $ S \subset N^{+} $ jest [2]-upraszczalny jest problemem NP-trudnym.
 		\end{frame}
 		
 	\subsection{APX-trudność}
 		\begin{frame} \frametitle{Aproksymacja też słabo...}
 			Def.: Problem APX-trudny
 		
-			Fakt: Problem obliczania [h]-sumset rank zbioru $ S \subset N^{+} $ jest APX-trudny.
+			Fakt: Problem obliczania rzędu [h]-sumset zbioru $ S \subset N^{+} $ jest APX-trudny.
 		\end{frame}
 		
 \section{Rozwiązanie}
@@ -123,12 +124,12 @@
 		\begin{frame} \frametitle{Do zrobienia: silna NP-trudność}
 			Def.: Problem silnie NP-trudny
 			
-			Pytanie: Czy problem obliczania [h]-sumset rank zbioru $ S \subset N^{+} $ jest silnie NP-trudny?
+			Pytanie: Czy problem obliczania rzędu [h]-sumset zbioru $ S \subset N^{+} $ jest silnie NP-trudny?
 		\end{frame}
 		
 	\subsection{Ciekawa hipoteza}
 		\begin{frame} \frametitle{Do zrobienia: hipoteza o $ S = \lbrace 1,2,...,n \rbrace $}
-			Hipoteza: Dla każdej liczby naturalnej $ n $ istnieje minimum cardinality [2]-sumset cover $ X $ zbioru $ \lbrace 1,2,...,n \rbrace $ taki, że $ max(X) \leq \lceil \frac{n}{2} \rceil + 1 $
+			Hipoteza: Dla każdej liczby naturalnej $ n $ istnieje pokrycie [2]-sumset o minimalnej mocy $ X $ zbioru $ \lbrace 1,2,...,n \rbrace $ taki, że $ max(X) \leq \lceil \frac{n}{2} \rceil + 1 $
 			
 			Zweryfikowane dla $ n \leq 80 $, przy czym dla $ n \notin \lbrace 45,46,61,62 \rbrace $ dodatkowo $ max(X) \leq \lceil \frac{n}{2} \rceil $
 		\end{frame}
@@ -144,4 +145,4 @@ for [2]-sumset covers. Information Processing Letters, 115, pp.1-5, 2015.
 		\end{itemize}
 	\end{frame}
 	
-\end{document} 
+\end{document}
