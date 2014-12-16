@@ -131,8 +131,15 @@
 	\subsection{Przypadek szczególny}
 		\begin{frame}{Przypadek $ S = \lbrace 1,2,...,n \rbrace $}
 			\begin{exampleblock}{Lemat}			
-				Niech $ S = \lbrace 1,2,...,n \rbrace $. Wtedy $ rk_{2}(S) = \Theta(\sqrt{n}) $
-			\end{exampleblock}		
+				Niech $ S = \lbrace 1,2,...,n \rbrace $. Wtedy $ rk_{2}(S) \leq \left\lceil \sqrt{n} \right\rceil - 2 $
+			\end{exampleblock}
+						
+			
+			\pause			
+			\vspace{\baselineskip}
+			\begin{exampleblock}{Wniosek}			
+				$ rk_{2}\left( \lbrace 1,2,...,n \rbrace \right) = \Theta(\sqrt{n}) $
+			\end{exampleblock}
 		\end{frame}
 		
 	\subsection{Znany algorytm}
@@ -161,6 +168,7 @@
 			\end{alertblock}
 			
 			\pause
+			\vspace{\baselineskip}
 			Zweryfikowane dla $ n \leq 80 $, przy czym dla $ n \notin \lbrace 45,46,61,62 \rbrace $ dodatkowo $ max(X) \leq \lceil \frac{n}{2} \rceil $
 		\end{frame}
 
