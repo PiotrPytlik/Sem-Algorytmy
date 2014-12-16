@@ -3,8 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ae}
-\setbeamercovered{transparent}
+\usepackage{amsfonts}
 \usetheme{Warsaw}
+
+\setbeamertemplate{headline}{}
+\setbeamercovered{invisible}
+
+\newcommand{\N}{\mathbb{N}}
 
 \begin{document}
 
@@ -19,18 +24,20 @@
 \end{frame}
 
 \begin{frame}{Plan prezentacji}
+	\setcounter{tocdepth}{1}
 	\tableofcontents
 \end{frame}
 
 \section{Sumsetowe pokrycia o minimalnej mocy}
 	\subsection{Definicja}
 		\begin{frame}{Podstawowe definicje}
-            Def.: h-iterowany sumset zbioru $ X $
-            $ hX = \lbrace x_1 + x_2 + ... + x_h : x_1,x_2,...,x_h \in X \rbrace $
-            
-            \vspace{\baselineskip}
-            
-			def. problemu
+			\begin{block}{Definicja}
+				\emph{h-iterowany sumset} zbioru $ X $ to zbiór $ hX = \lbrace x_1 + x_2 + ... + x_h : x_1,x_2,...,x_h \in X \rbrace $
+			\end{block}
+			
+			\pause
+            \begin{alertblock}{PROBLEM: Pokrycie sumsetowe o minimalnej mocy (Minimum cardinality sumset cover)}
+			\end{alertblock}
 		\end{frame}
 		
 	\subsection{Motywacja}
@@ -44,42 +51,38 @@
 		\end{frame}
 		
 \section{[2]-sumsetowe pokrycia o minimalnej mocy}
-	\subsection{Definicja}
-		\begin{frame}{W czym rzecz?}
-			Def.: [h]-sumset zbioru $ X $
+	\subsection{Definicja problemu}
+		\begin{frame}{Definicja problemu}
+			\begin{block}{Definicje}
+				\emph{[h]-sumset} zbioru $ X $ to zbiór $ [h]X = \bigcup_{i=1}^{h} iX $
+
+				\emph{[h]-sumsetowe pokrycie} zbioru $ S \subset \N^{+} $ to taki zbiór $ X \subset \N^{+} $ że $ S \subset [h]X $
+			\end{block}
 			
-			$ [h]X = \bigcup_{i=1}^{h} iX $
+			\pause
+			\begin{alertblock}{PROBLEM: [h]-sumsetowe pokrycie o minimalnej mocy (Minimum cardinality [h]-sumset cover)}
+				Dla danego zbioru $ S \subset \N^{+} $ znaleźć minimalne w sensie liczności [h]-sumsetowe pokrycie $ X $ zbioru $ S $.
+				
+				Wtedy $ |X| $ to \emph{[h]-sumsetowy rząd} zbioru $ S $ (piszemy $ |X| = rk_{h}(S) $).
+			\end{alertblock}
 			
-			Def.: [h]-sumsetowe pokrycie zbioru $ S \subset N^{+} $ to taki zbiór $ X \subset N^{+} $ że $ S \subset [h]X $
+			\pause
+			\begin{block}{Definicja}
+				Zbiór $ S \subset \N^{+} $ jest \emph{[h]-upraszczalny}, jeśli $ rk_{h}(S) < |S| $
+			\end{block}
 			
-			Problem: [h]-sumsetowe pokrycie o minimalnej mocy (Minimum cardinality [h]-sumset cover)
-			
-			Dla danego zbioru $ S \subset N^{+} $ znaleźć minimalne w sensie liczności [h]-sumsetowe pokrycie $ X $ zbioru $ S $. Wtedy $ |X| $ to [h]-sumsetowy rząd zbioru $ S $ (piszemy $ |X| = rk_{h}(S) $).
-			
-			Def.: Zbiór $ S \subset N^{+} $ jest [h]-upraszczalny, jeśli $ rk_{h}(S) < |S| $
+			\pause
+			W tej prezentacji zajmiemy się przypadkiem $ h=2 $.
 		\end{frame}
 		
 	\subsection{Przykłady}
 		\begin{frame}{Przykłady}
-			Przykład 1:
-			
-			$ S = \lbrace 1,2,...,11 \rbrace $
-			
-			$ X = \lbrace 1,3,5,6 \rbrace $
-		\end{frame}
-			
-		\begin{frame}{Przykłady}
-			Przykład 2:
-			
-			$ S = \lbrace 4,5,6 \rbrace $
-			
-			$ X = \lbrace 2,3 \rbrace $
-		\end{frame}
-		
-		\begin{frame}{Przykłady}		
-			Przykład 3:
-			
-			$ S =  \lbrace 4,7,10 \rbrace $						
+			\begin{enumerate}
+				\item $ S = \lbrace 1,2,...,11 \rbrace $, $ X = \lbrace 1,3,5,6 \rbrace $
+				\pause \item $ S = \lbrace 4,5,6 \rbrace $, $ X = \lbrace 2,3 \rbrace $
+				\pause \item $ S =  \lbrace 4,7,10 \rbrace $
+			\end{enumerate}
+								
 		\end{frame}
 		
 \section{Powiązane problemy}
@@ -100,20 +103,28 @@
 		
 	\subsection{NP-trudność}
 		\begin{frame}{Nie miejmy złudzeń...}
-			Fakt: Stwierdzenie, czy dany zbiór $ S \subset N^{+} $ jest [2]-upraszczalny jest problemem NP-trudnym.
+			\begin{exampleblock}{Fakt}
+				Stwierdzenie, czy dany zbiór $ S \subset \N^{+} $ jest [2]-upraszczalny jest problemem NP-trudnym.
+			\end{exampleblock}
+				
 		\end{frame}
 		
 	\subsection{APX-trudność}
 		\begin{frame}{Aproksymacja też słabo...}
 			Def.: Problem APX-trudny
-		
-			Fakt: Problem obliczania [h]-sumsetowego rzędu zbioru $ S \subset N^{+} $ jest APX-trudny.
+			
+			\pause
+			\begin{exampleblock}{Fakt}
+				Problem obliczania [h]-sumsetowego rzędu zbioru $ S \subset \N^{+} $ jest APX-trudny.
+			\end{exampleblock}
 		\end{frame}
 		
 \section{Rozwiązanie}
 	\subsection{Przypadek szczególny}
 		\begin{frame}{Przypadek $ S = \lbrace 1,2,...,n \rbrace $}
-			Lemat: Niech $ S = \lbrace 1,2,...,n \rbrace $. Wtedy $ rk_{2}(S) = \Theta(\sqrt{n}) $
+			\begin{exampleblock}{Lemat}			
+				Niech $ S = \lbrace 1,2,...,n \rbrace $. Wtedy $ rk_{2}(S) = \Theta(\sqrt{n}) $
+			\end{exampleblock}		
 		\end{frame}
 		
 	\subsection{Znany algorytm}
@@ -125,24 +136,30 @@
 		\begin{frame}{Do zrobienia: silna NP-trudność}
 			Def.: Problem silnie NP-trudny
 			
-			Pytanie: Czy problem obliczania [2]-sumsetowego rzędu zbioru $ S \subset N^{+} $ jest silnie NP-trudny?
+			\pause
+			\begin{alertblock}{Problem otwarty}
+				Czy problem obliczania [2]-sumsetowego rzędu zbioru $ S \subset \N^{+} $ jest silnie NP-trudny?
+			\end{alertblock}
 		\end{frame}
 		
 	\subsection{Ciekawa hipoteza}
 		\begin{frame}{Do zrobienia: hipoteza o $ S = \lbrace 1,2,...,n \rbrace $}
-			Hipoteza: Dla każdej liczby naturalnej $ n $ istnieje [2]-sumsetowe pokrycie $ X $ o minimalnej mocy zbioru $ \lbrace 1,2,...,n \rbrace $ takie, że $ max(X) \leq \lceil \frac{n}{2} \rceil + 1 $
+			\begin{alertblock}{Hipoteza}
+				Dla każdej liczby naturalnej $ n $ istnieje [2]-sumsetowe pokrycie $ X $ o minimalnej mocy zbioru $ \lbrace 1,2,...,n \rbrace $ takie, że $ max(X) \leq \lceil \frac{n}{2} \rceil + 1 $
+			\end{alertblock}
 			
+			\pause
 			Zweryfikowane dla $ n \leq 80 $, przy czym dla $ n \notin \lbrace 45,46,61,62 \rbrace $ dodatkowo $ max(X) \leq \lceil \frac{n}{2} \rceil $
 		\end{frame}
 
 \section{Bibliografia}
 	\begin{frame}{Nasze źródła}
 		\begin{itemize}
-			\item M.J. Collins, D. Kempe, J. Saia, and M. Young. Nonnegative integral
-subset representations of integer sets. Information Processing Letters, 101, pp. 129–133, 2007.
-			\item I. Fagnot, G. Fertin, S. Vialette. On finding small 2-generating sets. COCOON'2009, pp. 378–387.
-			\item L. Bulteau, G. Fertin, R. Rizzi, S. Vialette. Some algorithmic results
-for [2]-sumset covers. Information Processing Letters, 115, pp.1-5, 2015.
+			\item M.J. Collins, D. Kempe, J. Saia, and M. Young. \textit{Nonnegative integral
+subset representations of integer sets}. Information Processing Letters, 101, pp. 129–133, 2007.
+			\item I. Fagnot, G. Fertin, S. Vialette. \textit{On finding small 2-generating sets}. COCOON'2009, pp. 378–387.
+			\item L. Bulteau, G. Fertin, R. Rizzi, S. Vialette. \textit{Some algorithmic results
+for [2]-sumset covers}. Information Processing Letters, 115, pp.1-5, 2015.
 		\end{itemize}
 	\end{frame}
 	
