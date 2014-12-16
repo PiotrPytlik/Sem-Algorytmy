@@ -13,7 +13,7 @@
 
 \begin{document}
 
-\title{Minimalne [2]-sumsetowe pokrycia zbioru}
+\title{Minimalne [2]-sumsetowe pokrycie zbioru}
 \subtitle{Dotychczasowe wyniki i kwestie otwarte}
 \author[Piotr Pytlik \& Jakub Sękowski]{Piotr Pytlik \and Jakub Sękowski}
 \institute{Instytut Informatyki \\ Uniwersytet Wrocławski}
@@ -36,7 +36,7 @@
 			\end{block}
 			
 			\pause
-            \begin{alertblock}{PROBLEM: Pokrycie sumsetowe o minimalnej mocy (Minimum cardinality sumset cover)}
+            \begin{alertblock}{Pokrycie sumsetowe o minimalnej mocy (\rmfamily \textsc{Minimum cardinality sumset cover problem})}
 			\end{alertblock}
 		\end{frame}
 		
@@ -60,8 +60,8 @@
 			\end{block}
 			
 			\pause
-			\begin{alertblock}{PROBLEM: [h]-sumsetowe pokrycie o minimalnej mocy (Minimum cardinality [h]-sumset cover)}
-				Dla danego zbioru $ S \subset \N^{+} $ znaleźć minimalne w sensie liczności [h]-sumsetowe pokrycie $ X $ zbioru $ S $.
+			\begin{alertblock}{[h]-sumsetowe pokrycie o minimalnej mocy (\rmfamily \textsc{Minimum cardinality [h]-sumset cover problem})}
+				Dla danego zbioru $ S \subset \N^{+} $ znaleźć [h]-sumsetowe pokrycie $ X $ zbioru $ S $ o jak najmniejszej mocy.
 				
 				Wtedy $ |X| $ to \emph{[h]-sumsetowy rząd} zbioru $ S $ (piszemy $ |X| = rk_{h}(S) $).
 			\end{alertblock}
@@ -111,12 +111,20 @@
 		
 	\subsection{APX-trudność}
 		\begin{frame}{Aproksymacja też słabo...}
-			Def.: Problem APX-trudny
-			
-			\pause
 			\begin{exampleblock}{Fakt}
 				Problem obliczania [h]-sumsetowego rzędu zbioru $ S \subset \N^{+} $ jest APX-trudny.
+			\end{exampleblock}			
+			
+			\pause
+			\begin{block}{z Wikipedii:}
+				Problem jest \emph{APX-trudny}, jeśli dla każdego problemu w klasie APX istnieje do niego PTAS-redukcja.
+			\end{block}						
+			
+			\pause
+			\begin{exampleblock}{Fakt (też z Wikipedii)}
+				Jeśli dla pewnego problemu APX-trudnego istnieje wielomianowy algorytm rozwiązujący go z dowolnie małym błędem multiplikatywnym, to \alt<4->{$ P = NP $.}{...}
 			\end{exampleblock}
+			
 		\end{frame}
 		
 \section{Rozwiązanie}
@@ -134,7 +142,11 @@
 \section{Kwestie otwarte}
 	\subsection{Silna NP-trudność}
 		\begin{frame}{Do zrobienia: silna NP-trudność}
-			Def.: Problem silnie NP-trudny
+			\begin{block}{Definicja}
+				\emph{Problem silnie NP-trudny} to problem, który pozostaje NP-trudny nawet, gdy wszystkie jego dane liczbowe są ograniczone przez wielomian rozmiaru danych.
+				
+				\pause \textbf{Równoważnie:} Istnieje do niego redukcja wielomianowa z jakiegoś problemu silnie NP-zupełnego.
+			\end{block}				
 			
 			\pause
 			\begin{alertblock}{Problem otwarty}
