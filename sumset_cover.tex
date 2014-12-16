@@ -54,16 +54,16 @@
 	\subsection{Definicja problemu}
 		\begin{frame}{Definicja problemu}
 			\begin{block}{Definicje}
-				\emph{[h]-sumset} zbioru $ X $ to zbiór $ [h]X = \bigcup_{i=1}^{h} iX $
+				\emph{[h]-sumset} zbioru X to zbiór $ [h]X = \bigcup_{i=1}^{h} iX $
 
 				\emph{[h]-sumsetowe pokrycie} zbioru $ S \subset \N^{+} $ to taki zbiór $ X \subset \N^{+} $ że $ S \subset [h]X $
 			\end{block}
 			
 			\pause
 			\begin{alertblock}{[h]-sumsetowe pokrycie o minimalnej mocy (\rmfamily \textsc{Minimum cardinality [h]-sumset cover problem})}
-				Dla danego zbioru $ S \subset \N^{+} $ znaleźć [h]-sumsetowe pokrycie $ X $ zbioru $ S $ o jak najmniejszej mocy.
+				Dla danego zbioru $ S \subset \N^{+} $ znaleźć [h]-sumsetowe pokrycie X zbioru S o jak najmniejszej mocy.
 				
-				Wtedy $ |X| $ to \emph{[h]-sumsetowy rząd} zbioru $ S $ (piszemy $ |X| = rk_{h}(S) $).
+				Wtedy $ |X| $ to \emph{[h]-sumsetowy rząd} zbioru S (piszemy $ |X| = rk_{h}(S) $).
 			\end{alertblock}
 			
 			\pause
@@ -142,10 +142,55 @@
 			\end{exampleblock}
 		\end{frame}
 		
-	\subsection{Znany algorytm}
-		\begin{frame}
+	\subsection{Algorytm FPT dla przypadku ogólnego}
+		\begin{frame}{Algorytmy FPT}
+			\begin{block}{Definicja}			
+				Niech n będzie rozmiarem danych pewnego problemu, a k jednym z parametrów. Algorytm rozwiązujący ten problem w czasie $ O(f(k)poly(n)) $ dla pewnej funkcji k jest \emph{FPT (Fixed parameter tractable)}.
+			\end{block}
+			
+			\pause
+			\begin{exampleblock}{Wniosek}			
+				Przy ustalonej wartości parametru k, algorytm FPT działa w czasie wielomianowym.
+			\end{exampleblock}
 		\end{frame}
 		
+		\begin{frame}
+			Wstępnie o naszym algorytmie
+			
+			złożoność
+			
+			względem czego FPT?
+		\end{frame}
+		
+		\begin{frame}
+			def. X-realizacja
+			
+			def. minimalna X-realizacja
+		\end{frame}		
+		
+		\begin{frame}
+			lemat 1
+		\end{frame}
+		
+		\begin{frame}
+			def. graf k-zredukowany		
+		
+			lemat 2
+		\end{frame}
+		
+		\begin{frame}
+			\begin{exampleblock}{Lemat 3}			
+				Niech X będzie [2]-sumsetowym pokryciem zbioru $ S \subset \N^{+} $ o minimalnej mocy ($ |X| = k $) i niech $ B = (U,V,E) $ będzie minimalną X-realizacją zbioru S. Wtedy istnieje podzbiór $ U' \subset U $ o mocy k taki, że podgraf indukowany $ B[U',V] $ jest k-zredukowany.
+			\end{exampleblock}
+		\end{frame}
+				
+		\begin{frame}
+			pseudokod
+		\end{frame}
+		
+		\begin{frame}
+			lemat 5
+		\end{frame}
 \section{Kwestie otwarte}
 	\subsection{Silna NP-trudność}
 		\begin{frame}{Do zrobienia: silna NP-trudność}
@@ -164,7 +209,7 @@
 	\subsection{Ciekawa hipoteza}
 		\begin{frame}{Do zrobienia: hipoteza o $ S = \lbrace 1,2,...,n \rbrace $}
 			\begin{alertblock}{Hipoteza}
-				Dla każdej liczby naturalnej $ n $ istnieje [2]-sumsetowe pokrycie $ X $ o minimalnej mocy zbioru $ \lbrace 1,2,...,n \rbrace $ takie, że $ max(X) \leq \lceil \frac{n}{2} \rceil + 1 $
+				Dla każdej liczby naturalnej n istnieje [2]-sumsetowe pokrycie X o minimalnej mocy zbioru $ \lbrace 1,2,...,n \rbrace $ takie, że $ max(X) \leq \lceil \frac{n}{2} \rceil + 1 $
 			\end{alertblock}
 			
 			\pause
