@@ -8,10 +8,11 @@
 
 \begin{document}
 
-\title{Problem: Pokrycie [2]-sumset o minimalnej mocy}
+\title{Minimalne [2]-sumsetowe pokrycia zbioru}
 \subtitle{Dotychczasowe wyniki i kwestie otwarte}
 \author[Piotr Pytlik \& Jakub Sękowski]{Piotr Pytlik \and Jakub Sękowski}
 \institute{Instytut Informatyki \\ Uniwersytet Wrocławski}
+\date{22 grudnia 2014}
 
 \begin{frame}
 	\titlepage
@@ -22,7 +23,7 @@
 	\tableofcontents
 \end{frame}
 
-\section{Pokrycia sumset o minimalnej mocy}
+\section{Sumsetowe pokrycia o minimalnej mocy}
 	\subsection{Definicja}
 		\begin{frame} \frametitle{Podstawowe definicje}
             Def.: h-iterowany sumset zbioru $ X $
@@ -43,18 +44,18 @@
 			fakt o NP-zupełności
 		\end{frame}
 		
-\section{Pokrycia [2]-sumset o minimalnej mocy}
+\section{[2]-sumsetowe pokrycia o minimalnej mocy}
 	\subsection{Definicja}
 		\begin{frame} \frametitle{W czym rzecz?}
 			Def.: [h]-sumset zbioru $ X $
 			
 			$ [h]X = \bigcup_{i=1}^{h} iX $
 			
-			Def.: Pokrycie [h]-sumset zbioru $ S \subset N^{+} $ to taki zbiór $ X \subset N^{+} $ że $ S \subset [h]X $
+			Def.: [h]-sumsetowe pokrycie zbioru $ S \subset N^{+} $ to taki zbiór $ X \subset N^{+} $ że $ S \subset [h]X $
 			
-			Problem: Pokrycie [h]-sumset o minimalnej mocy
+			Problem: [h]-sumsetowe pokrycie o minimalnej mocy (Minimum cardinality [h]-sumset cover)
 			
-			Dla danego zbioru $ S \subset N^{+} $ znaleźć minimalne w sensie liczności pokrycie [h]-sumset $ X $ zbioru $ S $. Wtedy $ |X| $ to rząd [h]-sumset zbioru $ S $ (piszemy $ |X| = rk_{h}(S) $).
+			Dla danego zbioru $ S \subset N^{+} $ znaleźć minimalne w sensie liczności [h]-sumsetowe pokrycie $ X $ zbioru $ S $. Wtedy $ |X| $ to [h]-sumsetowy rząd zbioru $ S $ (piszemy $ |X| = rk_{h}(S) $).
 			
 			Def.: Zbiór $ S \subset N^{+} $ jest [h]-upraszczalny, jeśli $ rk_{h}(S) < |S| $
 		\end{frame}
@@ -83,11 +84,12 @@
 		\end{frame}
 		
 \section{Powiązane problemy}
-	\subsection{Postage stamp}
+	\subsection{Znaczki pocztowe}
 		\begin{frame}
+			Problem znaczków pocztowych (Postage stamp)
 		\end{frame}
 		
-	\subsection{Covering the set of strings}
+	\subsection{Pokrycie zbioru stringów}
 		\begin{frame}
 		\end{frame}
 		
@@ -106,7 +108,7 @@
 		\begin{frame} \frametitle{Aproksymacja też słabo...}
 			Def.: Problem APX-trudny
 		
-			Fakt: Problem obliczania rzędu [h]-sumset zbioru $ S \subset N^{+} $ jest APX-trudny.
+			Fakt: Problem obliczania [h]-sumsetowego rzędu zbioru $ S \subset N^{+} $ jest APX-trudny.
 		\end{frame}
 		
 \section{Rozwiązanie}
@@ -124,12 +126,12 @@
 		\begin{frame} \frametitle{Do zrobienia: silna NP-trudność}
 			Def.: Problem silnie NP-trudny
 			
-			Pytanie: Czy problem obliczania rzędu [h]-sumset zbioru $ S \subset N^{+} $ jest silnie NP-trudny?
+			Pytanie: Czy problem obliczania [2]-sumsetowego rzędu zbioru $ S \subset N^{+} $ jest silnie NP-trudny?
 		\end{frame}
 		
 	\subsection{Ciekawa hipoteza}
 		\begin{frame} \frametitle{Do zrobienia: hipoteza o $ S = \lbrace 1,2,...,n \rbrace $}
-			Hipoteza: Dla każdej liczby naturalnej $ n $ istnieje pokrycie [2]-sumset o minimalnej mocy $ X $ zbioru $ \lbrace 1,2,...,n \rbrace $ taki, że $ max(X) \leq \lceil \frac{n}{2} \rceil + 1 $
+			Hipoteza: Dla każdej liczby naturalnej $ n $ istnieje [2]-sumsetowe pokrycie $ X $ o minimalnej mocy zbioru $ \lbrace 1,2,...,n \rbrace $ takie, że $ max(X) \leq \lceil \frac{n}{2} \rceil + 1 $
 			
 			Zweryfikowane dla $ n \leq 80 $, przy czym dla $ n \notin \lbrace 45,46,61,62 \rbrace $ dodatkowo $ max(X) \leq \lceil \frac{n}{2} \rceil $
 		\end{frame}
