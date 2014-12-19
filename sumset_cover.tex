@@ -4,10 +4,15 @@
 \usepackage[T1]{fontenc}
 \usepackage{ae}
 \usepackage{amsfonts}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 \usetheme{Warsaw}
 
 \setbeamertemplate{headline}{}
 \setbeamercovered{invisible}
+
+\algrenewcommand\algorithmicrequire{\textbf{Dane:}}
+\algrenewcommand\algorithmicensure{\textbf{Wynik:}}
 
 \newcommand{\N}{\mathbb{N}}
 
@@ -54,9 +59,10 @@
 	\subsection{Definicja problemu}
 		\begin{frame}{Definicja problemu}
 			\begin{block}{Definicje}
-				\emph{[h]-sumset} zbioru X to zbiór $ [h]X = \bigcup_{i=1}^{h} iX $
-
-				\emph{[h]-sumsetowe pokrycie} zbioru $ S \subset \N^{+} $ to taki zbiór $ X \subset \N^{+} $ że $ S \subset [h]X $
+				\begin{itemize}
+					\item \emph{[h]-sumset} zbioru X to zbiór $ [h]X = \bigcup_{i=1}^{h} iX $
+					\item zbiór $ X \subset \N^{+} $ jest \emph{[h]-sumsetowym pokryciem} zbioru $ S \subset \N^{+} $, jeśli $ S \subset [h]X $
+				\end{itemize}
 			\end{block}
 			
 			\pause
@@ -122,7 +128,7 @@
 			
 			\pause
 			\begin{exampleblock}{Fakt (też z Wikipedii)}
-				Jeśli dla pewnego problemu APX-trudnego istnieje wielomianowy algorytm rozwiązujący go z dowolnie małym błędem multiplikatywnym, to \alt<4->{$ P = NP $.}{...}
+				Jeśli dla pewnego problemu APX-trudnego istnieje wielomianowy algorytm rozwiązujący go z dowolnie małym błędem multiplikatywnym, to $ P = NP $.
 			\end{exampleblock}
 			
 		\end{frame}
@@ -145,7 +151,7 @@
 	\subsection{Algorytm FPT dla przypadku ogólnego}
 		\begin{frame}{Algorytmy FPT}
 			\begin{block}{Definicja}			
-				Niech n będzie rozmiarem danych pewnego problemu, a k jednym z parametrów. Algorytm rozwiązujący ten problem w czasie $ O(f(k)poly(n)) $ dla pewnej funkcji k jest \emph{FPT (Fixed parameter tractable)}.
+				Niech n będzie rozmiarem danych pewnego problemu, a k jednym z parametrów. Algorytm rozwiązujący ten problem w czasie $ O(f(k)poly(n)) $ dla pewnej funkcji f jest \emph{FPT (Fixed parameter tractable)}.
 			\end{block}
 			
 			\pause
@@ -154,7 +160,7 @@
 			\end{exampleblock}
 		\end{frame}
 		
-		\begin{frame}
+		\begin{frame}{Pomysł na algorytm}
 			Wstępnie o naszym algorytmie
 			
 			złożoność
@@ -162,34 +168,74 @@
 			względem czego FPT?
 		\end{frame}
 		
-		\begin{frame}
+		\begin{frame}{Pomysł na algorytm}
 			def. X-realizacja
 			
 			def. minimalna X-realizacja
 		\end{frame}		
 		
-		\begin{frame}
+		\begin{frame}{Pomysł na algorytm}
 			lemat 1
 		\end{frame}
 		
-		\begin{frame}
+		\begin{frame}{Pomysł na algorytm}
 			def. graf k-zredukowany		
 		
 			lemat 2
 		\end{frame}
 		
-		\begin{frame}
+		\begin{frame}{Pomysł na algorytm}
 			\begin{exampleblock}{Lemat 3}			
 				Niech X będzie [2]-sumsetowym pokryciem zbioru $ S \subset \N^{+} $ o minimalnej mocy ($ |X| = k $) i niech $ B = (U,V,E) $ będzie minimalną X-realizacją zbioru S. Wtedy istnieje podzbiór $ U' \subset U $ o mocy k taki, że podgraf indukowany $ B[U',V] $ jest k-zredukowany.
 			\end{exampleblock}
 		\end{frame}
 				
-		\begin{frame}
-			pseudokod
+		\begin{frame}{Pomysł na algorytm}
+			\begin{algorithm}[H]
+			\begin{algorithmic}[1]
+				\Require $ S \subset \N^{+} $, $ k \in \N^{+} $
+				\Ensure 	[2]-sumsetowe pokrycie zbioru S o mocy k, jeśli takie istnieje lub \emph{NIL} wpp
+				\Statex
+				\ForAll{dwudzielne k-zredukowane grafy $ B = (U,V,E) $}
+					\ForAll{podzbiory $ S' \subset S $ o mocy k}
+						\ForAll{bijekcje $ \sigma: U \rightarrow S' $}
+							\If{istnieje odpowiednia bijekcja $ \chi: V \rightarrow \N^{+} $}
+								\State $ X \gets \lbrace \chi(v) : v \in V \rbrace $ \Comment{patrz: Lemat 2}
+								\If{$ S \subset [2]X $}
+									\State \Return X
+								\EndIf
+							\EndIf
+						\EndFor
+					\EndFor					
+				\EndFor
+				\State \Return \emph{NIL}
+			\end{algorithmic}
+			\end{algorithm}
 		\end{frame}
 		
-		\begin{frame}
-			lemat 5
+		\begin{frame}{Poprawność algorytmu}
+			Poprawność algorytmu wynika z lematu 2 oraz następującego faktu.		
+		
+			\begin{exampleblock}{Wniosek z lematu 3}			
+				Niech $ S \subset \N^{+} $ będzie zbiorem, dla którego $ rk_{2}(S) = k $. Wtedy istnieje podzbiór $ S' \subset S $ o mocy k taki, że jego X-realizacja jest k-zredukowana.
+			\end{exampleblock}
+		\end{frame}
+		
+		\begin{frame}{Złożoność czasowa}
+			\begin{itemize}
+				\item wszystkich k-zredukowanych grafów B jest $ O\left( k^{3/2 + k}e^{-k} \right) $
+				\pause \item wszystkich k-elementowych podzbiorów S' zbioru S jest $  \binom{|S|}{k} $
+				\pause \item wszystkich bijekcji $ U \rightarrow S' $ jest $ k! $
+				\pause \item znalezienie bijekcji $ \chi: V \rightarrow \N^{+} $ jest $ O\left( poly(k) \right) $ (z Lematu 2)
+				\pause \item sprawdzenie warunku $ S \subset [2]X $ również jest $ O\left( poly(k) \right) $
+			\end{itemize}
+			
+			\pause
+			Korzystając z prostego ograniczenia $ |S| = O\left( k^2 \right)$, mamy:
+			
+			\begin{exampleblock}{Fakt}			
+				Algorytm działa w $ O\left( k^{3k}e^{-k}poly(k) \right) = O\left( 2^{k(3\log k-1.4)}poly(k) \right)$
+			\end{exampleblock}		
 		\end{frame}
 \section{Kwestie otwarte}
 	\subsection{Silna NP-trudność}
@@ -225,6 +271,7 @@ subset representations of integer sets}. Information Processing Letters, 101, pp
 			\item I. Fagnot, G. Fertin, S. Vialette. \textit{On finding small 2-generating sets}. COCOON'2009, pp. 378–387.
 			\item L. Bulteau, G. Fertin, R. Rizzi, S. Vialette. \textit{Some algorithmic results
 for [2]-sumset covers}. Information Processing Letters, 115, pp.1-5, 2015.
+			\item Angielska Wikipedia
 		\end{itemize}
 	\end{frame}
 	
