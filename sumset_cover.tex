@@ -119,18 +119,28 @@
 			\end{block}
 		\end{frame}
 		
-	\subsection{Pokrycie zbioru stringów}
-		\begin{frame}
-			\begin{block}{Pokrycie zbioru słów}
-                Mając zbiór słów $ S $ chcemy znaleźć zbiór $ C $ pod-słów z $ S $ taki, że każde słowo z $ S $ może być napisane przez sklejanie słów z $ C $.
-                Podejście do tego problemu jest w tej chwili czysto teoretyczne, gdyż jest ono NP-trudne i niefajne.
-                Zauważmy jednak, że jeśli mamy alfabet unarny, to problem ten jest równoważny z naszym problemem.
-                \begin{enumerate}
-				    \pause \item $ S = \lbrace a,aa,aaa,\dots,aaaaaaaaaaa \rbrace $, $ C = \lbrace a,aaa,aaaaa,aaaaaa \rbrace $
-				    \pause \item $ S = \lbrace aaaa,aaaaa,aaaaaa \rbrace $, $ C = \lbrace aa,aaa \rbrace $
-				    \pause \item $ S = \lbrace aaaa,aaaaaaa,aaaaaaaaaa \rbrace $, $ C = S $
-                \end{enumerate}
-			\end{block}
+	\subsection{Pokrycie zbioru słów}
+		\begin{frame}{Pokrycie zbioru słów}
+%			Tutaj tez trzeba troche wiecej szczegolowosci. Problem jest NP-trudny dla alfabetu binarnego, ale dla unarnego jego status nie jest znany (!). Jest to jeden z problemow otwartych, o ktorych mowimy na koniec prezentacji. Poprawilem to po swojemu, ale w razie czego, mozesz jeszcze to modyfikowac.
+
+			\begin{alertblock}{l-pokrycie zbioru słów}
+				Dla danego zbioru słów $ S $, znaleźć możliwie najmniej liczny zbiór słów $ C $ taki, że każde słowo ze zbioru $ S $ jest konkatenacją co najwyżej $ l $ słów ze zbioru $ C $.
+			\end{alertblock}
+			
+			\pause
+			\begin{exampleblock}{Fakt}
+					Jeśli rozważamy słowa nad pewnym alfabetem binarny i $ l \geq 2 $, to problem jest NP-trudny.
+			\end{exampleblock}
+			
+			\pause
+			Dla nas interesujący jest przypadek alfabetu unarnego. Wtedy problem sprowadza się do [l]-sumsetowego pokrycia zbioru.
+			
+			Kilka przykładów:
+            	\begin{enumerate}
+				\pause \item $ S = \lbrace a,aa,aaa,\dots,aaaaaaaaaaa \rbrace $, $ C = \lbrace a,aaa,aaaaa,aaaaaa \rbrace $
+				\pause \item $ S = \lbrace aaaa,aaaaa,aaaaaa \rbrace $, $ C = \lbrace aa,aaa \rbrace $
+				\pause \item $ S = \lbrace aaaa,aaaaaaa,aaaaaaaaaa \rbrace $, $ C = S $
+            \end{enumerate}
 		\end{frame}
 		
 \section{Trudność problemu}
