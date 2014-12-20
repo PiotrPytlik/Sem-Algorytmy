@@ -41,18 +41,28 @@
 			\end{block}
 			
 			\pause
-            \begin{alertblock}{Pokrycie sumsetowe o minimalnej mocy (\rmfamily \textsc{Minimum cardinality sumset cover problem})}
+            \begin{alertblock}{Pokrycie [2]-sumsetowe o minimalnej mocy (\rmfamily \textsc{Minimum cardinality [2]-sumset cover problem})}
+                Mając zbiór $ S \subset \N^{+} $, chcemy znaleźć \emph{pokrycie [2]-sumsetowe $ X \subset \N^{+} $ o minimalnej mocy} takie, że $ \forall s \in S, s \in X $ lub $ \exists x_1,x_2 \in X : x_1 + x_2 = s $.
 			\end{alertblock}
 		\end{frame}
 		
 	\subsection{Motywacja}
-		\begin{frame}
-			radioterapia
+		\begin{frame}{Do czego to się przydaje}
+            \begin{block}{Radioterapia}
+    			Uogólniona wersja tego problemu, czyli \emph{Minimum Generating Set} jest związana z radioterapią.
+                Elementy z $ S $ oznaczają dawki promieniowania potrzebne w różnych miejscach na ciele, a elementy z $ X $ oznaczają dawki, które mogą być podawane w kilku miejscach na ciele jednocześnie.
+            \end{block}
 		\end{frame}	
 			
 	\subsection{NP-zupełność}
-		\begin{frame}
-			fakt o NP-zupełności
+		\begin{frame}{Wcale nie takie proste}
+            \begin{block}{NP-zupełność}
+                Udowodniono w pracy \emph{Nonnegative Integral Subset Representations of Integer Sets} przez M.J. Collins, D. Kempe, J. Saia, M. Young.
+                Pokazali oni redukcję z problemu \emph{Positive NAE-3SAT(5)}, który jest NP-zupełny, do problemu:
+            \end{block}
+            \begin{block}{Generating Set}
+                Mając podany zbiór $ S \subset \N^{+} $ oraz $ k > 0 $ sprawdzić czy istnieje zbiór $ T \subset \N^{+} $ taki, że $ |T| = k $ oraz $ \forall s \in S, s $ jest sumą jakiegoś podzbioru elementów T
+            \end{block}
 		\end{frame}
 		
 \section{[2]-sumsetowe pokrycia o minimalnej mocy}
@@ -94,17 +104,48 @@
 \section{Powiązane problemy}
 	\subsection{Znaczki pocztowe}
 		\begin{frame}
-			Problem znaczków pocztowych (Postage stamp)
+			\begin{block}{Znaczki pocztowe}
+                Zagadka matematyczna jako problem.
+                Chcemy wysłać list, ale mamy ograniczone miejsce na znaczki, oraz podane wartości znaczków.
+                Musimy podać najmniejszą wartość, której nie możemy uzyskać za pomocą znaczków z ustalonym ograniczeniem ich ilości.
+                \begin{itemize}
+				    \pause \item $ S = \lbrace 1, 2, 5, 20 \rbrace $, ograniczenie do 3 znaczków.
+                        \begin{itemize}
+                            \item szukana wartość = 13
+                        \end{itemize}
+				    \pause \item $ S = \lbrace 1, 2, 4, 6 \rbrace $, ograniczenie do 2 znaczków.
+                        \begin{itemize}
+                            \item szukana wartość = 9
+                        \end{itemize}
+				    \pause \item $ S =  \lbrace 1, 2, 5, 10, 20, 50 \rbrace $ ograniczenie do 4 znaczków.
+                        \begin{itemize}
+                            \item szukana wartość = 38
+                        \end{itemize}
+                \end{itemize}
+			\end{block}
 		\end{frame}
 		
 	\subsection{Pokrycie zbioru stringów}
 		\begin{frame}
+			\begin{block}{Pokrycie zbioru słów}
+                Mając zbiór słów $ S $ chcemy znaleźć zbiór $ C $ pod-słów z $ S $ taki, że każde słowo z $ S $ może być napisane przez sklejanie słów z $ C $.
+                Podejście do tego problemu jest w tej chwili czysto teoretyczne, gdyż jest ono NP-trudne i niefajne.
+                Zauważmy jednak, że jeśli mamy alfabet unarny, to problem ten jest równoważny z naszym problemem.
+                \begin{enumerate}
+				    \pause \item $ S = \lbrace a,aa,aaa,\dots,aaaaaaaaaaa \rbrace $, $ C = \lbrace a,aaa,aaaaa,aaaaaa \rbrace $
+				    \pause \item $ S = \lbrace aaaa,aaaaa,aaaaaa \rbrace $, $ C = \lbrace aa,aaa \rbrace $
+				    \pause \item $ S = \lbrace aaaa,aaaaaaa,aaaaaaaaaa \rbrace $, $ C = S $
+                \end{enumerate}
+			\end{block}
 		\end{frame}
 		
 \section{Trudność problemu}
 	\subsection{Proste ograniczenia}
 		\begin{frame}
-			lemat 1 z $"On finding..."$
+            \begin{block}{Proste ograniczenia na [2]-sumsetowy rząd}
+			    Dla dowolnego $ S \subset \N^{+} $ o mocy $ n $:
+                $ \lceil \frac{1}{2} * ( \sqrt{8n + 9} - 3 ) \rceil \leq rk_2(S) \leq n $
+            \end{block}
 		\end{frame}
 		
 	\subsection{NP-trudność}
