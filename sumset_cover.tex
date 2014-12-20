@@ -89,8 +89,7 @@
 				\item $ S = \lbrace 1,2,...,11 \rbrace $, $ X = \lbrace 1,3,5,6 \rbrace $
 				\pause \item $ S = \lbrace 4,5,6 \rbrace $, $ X = \lbrace 2,3 \rbrace $
 				\pause \item $ S =  \lbrace 4,7,10 \rbrace $
-			\end{enumerate}
-								
+			\end{enumerate}						
 		\end{frame}
 		
 \section{Powiązane problemy}
@@ -133,11 +132,15 @@
 		
 \section{Trudność problemu}
 	\subsection{Proste ograniczenia}
-		\begin{frame}
-            \begin{block}{Proste ograniczenia na [2]-sumsetowy rząd}
+		\begin{frame}{Proste ograniczenia na [2]-sumsetowy rząd}
+            \begin{block}{Lemat}
 			    Dla dowolnego $ S \subset \N^{+} $ o mocy $ n $:
-                $ \lceil \frac{1}{2} * ( \sqrt{8n + 9} - 3 ) \rceil \leq rk_2(S) \leq n $
+                $ \lceil \frac{1}{2} ( \sqrt{8n + 9} - 3 ) \rceil \leq rk_2(S) \leq n $
             \end{block}
+            
+            \pause
+            \vspace{\baselineskip}
+            Warto zanotować sobie, że $ rk_2(S) = \Omega \left( \sqrt{n} \right) $, gdyż z tego będziemy jeszcze korzystali.
 		\end{frame}
 		
 	\subsection{NP-trudność}
