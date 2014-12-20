@@ -35,22 +35,16 @@
 
 \section{Sumsetowe pokrycia o minimalnej mocy}
 	\subsection{Definicja}
-		\begin{frame}{Podstawowe definicje}
-			\begin{block}{Definicja}
-				\emph{h-iterowany sumset} zbioru $ X $ to zbiór $ hX = \lbrace x_1 + x_2 + ... + x_h : x_1,x_2,...,x_h \in X \rbrace $
-			\end{block}
-			
-			\pause
-            \begin{alertblock}{Pokrycie [2]-sumsetowe o minimalnej mocy (\rmfamily \textsc{Minimum cardinality [2]-sumset cover problem})}
-                Mając zbiór $ S \subset \N^{+} $, chcemy znaleźć \emph{pokrycie [2]-sumsetowe $ X \subset \N^{+} $ o minimalnej mocy} takie, że $ \forall s \in S, s \in X $ lub $ \exists x_1,x_2 \in X : x_1 + x_2 = s $.
+		\begin{frame}{Ogólniejszy problem}
+			\begin{alertblock}{Pokrycie sumsetowe o minimalnej mocy (\rmfamily \textsc{Minimum Generating Set})}
+                Dla danego zbioru $ S \subset \N^{+} $ znaleźć taki zbiór X, że każdy element zbioru S jest sumą pewnego podzbioru zbioru X, i ponadto X miał najmniejszą moc spośród zbiorów o tej własności.
 			\end{alertblock}
 		\end{frame}
 		
 	\subsection{Motywacja}
 		\begin{frame}{Do czego to się przydaje}
             \begin{block}{Radioterapia}
-    			Uogólniona wersja tego problemu, czyli \emph{Minimum Generating Set} jest związana z radioterapią.
-                Elementy z $ S $ oznaczają dawki promieniowania potrzebne w różnych miejscach na ciele, a elementy z $ X $ oznaczają dawki, które mogą być podawane w kilku miejscach na ciele jednocześnie.
+    				Elementy z $ S $ oznaczają dawki promieniowania potrzebne w różnych miejscach na ciele, a elementy z $ X $ oznaczają dawki, które mogą być podawane w kilku miejscach na ciele jednocześnie.
             \end{block}
 		\end{frame}	
 			
@@ -60,9 +54,9 @@
                 Udowodniono w pracy \emph{Nonnegative Integral Subset Representations of Integer Sets} przez M.J. Collins, D. Kempe, J. Saia, M. Young.
                 Pokazali oni redukcję z problemu \emph{Positive NAE-3SAT(5)}, który jest NP-zupełny, do problemu:
             \end{block}
-            \begin{block}{Generating Set}
-                Mając podany zbiór $ S \subset \N^{+} $ oraz $ k > 0 $ sprawdzić czy istnieje zbiór $ T \subset \N^{+} $ taki, że $ |T| = k $ oraz $ \forall s \in S, s $ jest sumą jakiegoś podzbioru elementów T
-            \end{block}
+            \begin{alertblock}{Generating Set}
+                Mając podany zbiór $ S \subset \N^{+} $ oraz $ k > 0 $ sprawdzić czy istnieje zbiór $ X \subset \N^{+} $ o mocy $ k $ taki, że każdy element zbioru S jest sumą pewnego podzbioru zbioru X.
+            \end{alertblock}
 		\end{frame}
 		
 \section{[2]-sumsetowe pokrycia o minimalnej mocy}
@@ -70,6 +64,7 @@
 		\begin{frame}{Definicja problemu}
 			\begin{block}{Definicje}
 				\begin{itemize}
+					\item \emph{h-iterowany sumset} zbioru $ X $ to zbiór $ hX = \lbrace x_1 + x_2 + ... + x_h : x_1,x_2,...,x_h \in X \rbrace $
 					\item \emph{[h]-sumset} zbioru X to zbiór $ [h]X = \bigcup_{i=1}^{h} iX $
 					\item zbiór $ X \subset \N^{+} $ jest \emph{[h]-sumsetowym pokryciem} zbioru $ S \subset \N^{+} $, jeśli $ S \subset [h]X $
 				\end{itemize}
@@ -86,9 +81,6 @@
 			\begin{block}{Definicja}
 				Zbiór $ S \subset \N^{+} $ jest \emph{[h]-upraszczalny}, jeśli $ rk_{h}(S) < |S| $
 			\end{block}
-			
-			\pause
-			W tej prezentacji zajmiemy się przypadkiem $ h=2 $.
 		\end{frame}
 		
 	\subsection{Przykłady}
