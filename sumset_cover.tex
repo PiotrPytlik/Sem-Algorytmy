@@ -322,8 +322,13 @@
 		\end{frame}
 		
 		\begin{frame}{Poprawność algorytmu}
-			Poprawność algorytmu wynika z lematu 2 oraz następującego faktu.		
-		
+			Poprawność algorytmu wprost wynika z następujących faktów:
+			
+			\begin{exampleblock}{Lemat 2}
+                Niech $ B = (U,V,E) $ będzie $ k $-zredukowanym grafem dwudzielnym oraz $ \sigma : U \rightarrow \N^{+} $ będzie iniekcją.
+                Wtedy istnieje najwyżej jedno mapowanie $ \chi : V \rightarrow \N^{+} $ t. że dla dowolnego $ u \in U $ mamy $ \sigma(u) = \sum_{v \in N(u)}\chi(v) $. Możemy też wyliczyć to mapowanie w czasie wielomianowym, o ile ono istnieje.
+            \end{exampleblock}			
+					
 			\begin{exampleblock}{Wniosek z lematu 3}			
 				Niech $ S \subset \N^{+} $ będzie zbiorem, dla którego $ rk_{2}(S) = k $. Wtedy istnieje podzbiór $ S' \subset S $ o mocy k taki, że jego X-realizacja jest k-zredukowana.
 			\end{exampleblock}
