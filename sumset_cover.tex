@@ -95,27 +95,20 @@
 \section{Powiązane problemy}
 	\subsection{Znaczki pocztowe}
 		\begin{frame}{Znaczki pocztowe}
-			Szczerze mowiac, moim zdaniem troche slabo jest to opisane. Ludzie zwykle chca konkretow:
-			- formalna definicja (matematyczna a nie jakiestam znaczki; o intuicjach mozna powiedziec slownie, a niekoniecznie trzeba je wrzucac na slajdy), zeby bylo widac powiazanie z naszym problemem
-			- zlozonosc znanych algorytmow (tez interesujaca, bo okazuje sie, ze sa to algorytmy FPT tak, jak nasz)
 			\begin{block}{Znaczki pocztowe (\rmfamily \textsc{Postage Stamp Problem})}
-                Zagadka matematyczna jako problem.
-                Chcemy wysłać list, ale mamy ograniczone miejsce na znaczki, oraz podane wartości znaczków.
-                Musimy podać najmniejszą wartość, której nie możemy uzyskać za pomocą znaczków z ustalonym ograniczeniem ich ilości.
+                Mając podane $ h, k \in \N^{+} $, znaleźć największe takie $ n $, dla którego istnieje [h]-sumsetowe pokrycie $ X $ dla zbioru $ \lbrace 1, 2, \dots , n \rbrace $, o mocy $ k $. Takie $ n $ oznaczamy jako $ N(h,k) $.
                 \begin{itemize}
-				    \pause \item $ S = \lbrace 1, 2, 5, 20 \rbrace $, ograniczenie do 3 znaczków.
-                        \begin{itemize}
-                            \item szukana wartość = 13
-                        \end{itemize}
-				    \pause \item $ S = \lbrace 1, 2, 4, 6 \rbrace $, ograniczenie do 2 znaczków.
-                        \begin{itemize}
-                            \item szukana wartość = 9
-                        \end{itemize}
-				    \pause \item $ S =  \lbrace 1, 2, 5, 10, 20, 50 \rbrace $ ograniczenie do 4 znaczków.
-                        \begin{itemize}
-                            \item szukana wartość = 38
-                        \end{itemize}
+				    \pause \item $ N(1,5) = 5 $, $ X = \lbrace 1, 2, 3, 4, 5 \rbrace $
+				    \pause \item $ N(13,1) = 13 $, $ X = \lbrace 1 \rbrace $
+				    \pause \item $ N(3,2) = 7 $, $ X = \lbrace 1, 3 \rbrace $
+				    \pause \item $ N(2,3) = 8 $, $ X = \lbrace 1, 3, 4 \rbrace $
+                    \pause
                 \end{itemize}
+            \end{block}
+            \begin{block}{Ciekawe przypadki}
+                Łatwo zauważyć, że $ N(1,k) = k $, oraz  $ N(h,1) = h $.
+                Udowodniono również, że $ N(h,2) = \lfloor \frac{h^2 + 6h + 1}{4} \rfloor $.
+                Zaskakujące jest jednak to, że nadal nie istnieją zwięzłe wzory na $ n $ dla żadnych innych par $ (h,k) $ gdzie jeden z wyrazów jest ustalony, w tym też dla $ N(2,k) $.
 			\end{block}
 		\end{frame}
 		
@@ -129,7 +122,7 @@
 			
 			\pause
 			\begin{exampleblock}{Fakt}
-					Jeśli rozważamy słowa nad pewnym alfabetem binarny i $ l \geq 2 $, to problem jest NP-trudny.
+					Jeśli rozważamy słowa nad pewnym alfabetem binarnym, oraz $ l \geq 2 $, to problem jest NP-trudny.
 			\end{exampleblock}
 			
 			\pause
@@ -150,7 +143,7 @@
 			    Dla dowolnego $ S \subset \N^{+} $ o mocy $ n $:
                 $ \lceil \frac{1}{2} ( \sqrt{8n + 9} - 3 ) \rceil \leq rk_2(S) \leq n $
             \end{block}
-            
+
             \pause
             \vspace{\baselineskip}
             Warto zanotować sobie, że $ rk_2(S) = \Omega \left( \sqrt{n} \right) $, gdyż z tego będziemy jeszcze korzystali.
@@ -159,7 +152,7 @@
 	\subsection{NP-trudność}
 		\begin{frame}{Nie miejmy złudzeń...}
 			\begin{exampleblock}{Fakt}
-				Stwierdzenie, czy dany zbiór $ S \subset \N^{+} $ jest [2]-upraszczalny jest problemem NP-trudnym.
+				Stwierdzenie, czy dany zbiór $ S \subset \N^{+} $ jest [2]-upraszczalny $ \left( rk_{h}(S) < |S| \right) $ jest problemem NP-trudnym.
 			\end{exampleblock}
 		\end{frame}
 		
@@ -207,31 +200,96 @@
 				Przy ustalonej wartości parametru k, algorytm FPT działa w czasie wielomianowym.
 			\end{exampleblock}
 		\end{frame}
-		
-		\begin{frame}{Pomysł na algorytm}
-			Wstępnie o naszym algorytmie
-			
-			złożoność
-			
-			względem czego FPT?
+
+		\begin{frame}{Wstęp}
+            \begin{block}{Wcześniejszy algorytm}
+                W pracy \emph{On finding small 2-generating sets} przedstawiono lemat o reprezentacji, z którego wynikał algorytm \emph{FPT} działający w czasie
+                $ O\left( 5^{\frac{k^{2}(k+3)}{2}}k^{2}\log k \right) $ sprawdzający czy istnieje [2]-sumsetowe pokrycie zbioru $ S \subset \N^{+} $ o mocy $ \leq k $.
+            \end{block}
+            \begin{block}{Nowy algorytm}
+                Przedstawimy lepszy algorytm \emph{FPT} działający w czasie
+                $ O\left( 2^{k(3\log k-1.4)}poly(k) \right)$
+            \end{block}
+        \end{frame}
+        \begin{frame}{Opis}
+            \begin{block}{Opis danych}
+                Mając multigraf $ G = (V,E) $ oznaczamy
+                \begin{itemize}
+                    \item $ N_{G}(u) $ - zbiór sąsiadów $ u \in V $
+                    \item $ \forall V' \subset V, N_{G}(V') $ - zbiór sąsiadów wszystkich wierzchołków $ V' $
+                \end{itemize}
+                W obu przypadkach dopuszczamy zbiory z powtórzeniami.
+                Niech $ S = \lbrace s_i : 1 \leq i \leq n \rbrace \subset \N^{+} $, a niech $ X = \lbrace x_i : 1 \leq i \leq k \rbrace \subset \N^{+} $ będzie jakimś [2]-sumsetowym pokryciem $ S $.
+            \end{block}
+        \end{frame}
+        \begin{frame}{Definicje}
+            \begin{block}{$ X $-realizacja $ S $}
+                Mówimy, że graf dwudzielny $ B = (U,V,E) $ jest $ X $-realizacją $ S $ z dwoma bijekcjami $ \sigma : U \rightarrow S, \chi \rightarrow X $ jeżeli $ \forall u \in U, d_{B}(u) \in \lbrace 1,2 \rbrace $ oraz:
+                \begin{itemize}
+                    \item $ d_{B}(u) = 1 $ i $ \lbrace u, v \rbrace \in E $, to $ \sigma(u) = \chi(v) $
+                    \item $ d_{B}(u) = 2 $ i $ \lbrace u, v \rbrace, \lbrace u, v' \rbrace \in E $, to $ \sigma(u) = \chi(v) + \chi(v') $ (być może $ v = v' $)
+                \end{itemize}
+            \end{block}
+            \begin{block}{Minimalna $ X $-realizacja $ S $}
+                $ B = (U,V,E) $, będące $ X $-realizacją $ S \subset \N^{+} $ jest minimalna, jeśli $ X $ jest [2]-sumsetowym pokryciem $ S $ o minimalnej mocy, tzn. $ S $ ma [2]-sumsetowy rząd $ |X| $.
+            \end{block}
 		\end{frame}
 		
 		\begin{frame}{Pomysł na algorytm}
-			def. X-realizacja
-			
-			def. minimalna X-realizacja
-		\end{frame}		
-		
-		\begin{frame}{Pomysł na algorytm}
-			lemat 1
+			\begin{exampleblock}{Lemat 1}
+                Niech $ B = (U,V,E) $ będzie minimalną $ X $-realizacją pewnego $ S \subset \N^{+} $.
+                Każda spójna składowa posiada $ u \in U $ stopnia 1 i/lub cykl prosty o długości $ 4l + 2 $ dla pewnego $ l \geq 0 ) $
+            \end{exampleblock}
 		\end{frame}
 		
 		\begin{frame}{Pomysł na algorytm}
-			def. graf k-zredukowany		
-		
-			lemat 2
+            \begin{block}{Graf $ k $-zredukowany}
+                $ B = (U,V,E) $ jest $ k $-zredukowany jeśli:
+                \begin{enumerate}
+                    \pause \item $ |U| = |V| = k $
+                    \pause \item $ \forall u \in U, d_{B}(u) \in \lbrace 1, 2 \rbrace $
+                    \pause\item $ B $ zawiera pełne skojarzenie
+                    oraz
+                    \pause \item każda spójna składowa ma pewien $ u \in U, d_{B}(u) = 1 $ i/lub cykl prosty o długości $ 4l + 2 $ dla pewnego $ l \geq 0 $.
+                \end{enumerate}
+            \end{block}
+		\end{frame}
+
+		\begin{frame}{Pomysł na algorytm}
+			\begin{exampleblock}{Lemat 2}
+                Niech $ B = (U,V,E) $ będzie $ k $-zredukowanym grafem dwudzielnym oraz $ \sigma : U \rightarrow \N^{+} $ będzie iniekcją.
+                Wtedy istnieje najwyżej jedno mapowanie $ \chi : V \rightarrow \N^{+} $ t. że dla dowolnego $ u \in U $ mamy $ \sigma(u) = \sum_{v \in N(u)}\chi(v) $. Możemy też wyliczyć to mapowanie w czasie wielomianowym, o ile ono istnieje.
+            \end{exampleblock}
 		\end{frame}
 		
+		\begin{frame}{Pomysł na algorytm}
+            \begin{block}{Dowód lematu 2}
+                Najpierw wyliczamy $ \chi(v^{+}) $ dla dokładnie jednego $ v^{+} \in V $ w każdej spójnej składowej w $ B $.
+                \begin{itemize}
+                    \item Niech $ B_i = (U_i,V_i,E_i) $ będzie dowolną spójną składową $ B $. Jeśli istnieje $ u \in U_i $ stopnia 1, niech $ v^{+} $ będzie (jedynym) sąsiadem $ u $ oraz ustalmy $ \chi(v^{+}) = \sigma(u) $.
+                    \pause \item W.p.p. zgodnie z lematem 1, $ B_i $ ma cykl prosty długości $ 4l + 2 $ dla pewnego $ l \geq 0 $.
+                        Niech $ \left( u_1,v^{+},u_2,v_2, \dots, u_{2l+1}, v_{2l+1} \right) $ będzie dowolnym takim cyklem, i ustalmy $ \chi(v^{+}) = \sum_{i=1}^{2l+1}\frac{1}{2}(-1)^{i-1}\sigma(u_i) $.
+                \end{itemize}
+            \end{block}
+        \end{frame}
+        \begin{frame}{Pomysł na algorytm}
+            \begin{block}{Dowód lematu 2 - c.d.}
+                Teraz dla każdej spójnej składowej jest dokładnie jeden $ v^{+} $ z ustalonym $ \chi(v^{+}) $.
+                \pause
+                \begin{itemize}
+                    \item $ \forall v \in V $ że $ \chi(v) $ nie zostało ustalone, rozpatrzmy dowolną drogę długości $ 2p $ od $ v $ do $ v^{+} \in V $, że $ \chi(v^{+}) $ było ustalone w kroku 1, $ \left( v,u_1,v_1, \dots, v_{p-1},u_p,v^{+} \right) $. Ustalmy $ \chi(v) = (-1)^p\chi(v^{+}) + \sum_{i=1}^{p}(-1)^{i-1}\sigma(u_i) $.
+                \end{itemize}
+                Teraz $ \forall u \in U $ wystarczy sprawdzić, że $ \sigma(u) = \sum_{v \in N(u)}\chi(v) $.
+            \end{block}
+            \begin{block}{Wnioski}
+                Widać, że ten program pracuje w czasie wielomianowym.
+                \newline
+                Jeżeli $ \chi $ ma dodatnie, całkowitoliczbowe wartości, to $ \chi : V \rightarrow \N^{+} $ jest poszukiwanym mapowaniem.
+                \newline
+                Ponadto z konstrukcji wynika, że jest to jedyne mapowanie spełniające $ \forall u \in U, \sum_{v \in N(u)}\chi(v) = \sigma(u) $.
+            \end{block}
+		\end{frame}
+
 		\begin{frame}{Pomysł na algorytm}
 			\begin{exampleblock}{Lemat 3}			
 				Niech X będzie [2]-sumsetowym pokryciem zbioru $ S \subset \N^{+} $ o minimalnej mocy ($ |X| = k $) i niech $ B = (U,V,E) $ będzie minimalną X-realizacją zbioru S. Wtedy istnieje podzbiór $ U' \subset U $ o mocy k taki, że podgraf indukowany $ B[U',V] $ jest k-zredukowany.
